@@ -115,3 +115,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}

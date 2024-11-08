@@ -22,6 +22,7 @@ type Translations = {
     lightMode: string;
     darkMode: string;
     language: string;
+    emptyTodoError: string;
   };
 };
 
@@ -46,6 +47,7 @@ export const translations: Translations = {
     lightMode: "Light Mode",
     darkMode: "Dark Mode",
     language: "Language",
+    emptyTodoError: 'Please enter a todo',
   },
   it: {
     addTodo: "Aggiungi",
@@ -67,6 +69,7 @@ export const translations: Translations = {
     lightMode: "Tema Chiaro",
     darkMode: "Tema Scuro",
     language: "Lingua",
+    emptyTodoError: 'Per favore inserisci un todo',
   },
   fr: {
     addTodo: "Ajouter",
@@ -88,6 +91,7 @@ export const translations: Translations = {
     lightMode: "Mode Clair",
     darkMode: "Mode Sombre",
     language: "Langue",
+    emptyTodoError: 'Veuillez entrer une tâche',
   },
   es: {
     addTodo: "Añadir",
@@ -109,6 +113,7 @@ export const translations: Translations = {
     lightMode: "Modo Claro",
     darkMode: "Modo Oscuro",
     language: "Idioma",
+    emptyTodoError: 'Por favor, ingrese una tarea',
   },
   de: {
     addTodo: "Hinzufügen",
@@ -130,6 +135,7 @@ export const translations: Translations = {
     lightMode: "Hellmodus",
     darkMode: "Dunkelmodus",
     language: "Sprache",
+    emptyTodoError: 'Bitte geben Sie eine Aufgabe ein',
   },
 };
 

@@ -116,11 +116,14 @@ export function TodoAppComponent() {
   }, [darkMode])
 
   const addTodo = () => {
-    if (newTodo.trim() !== '') {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }])
-      setNewTodo('')
-      toast.success(t.todoAdded)
+    if (newTodo.trim() === '') {
+      toast.error(t.emptyTodoError || 'Please enter a todo')
+      return
     }
+    
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }])
+    setNewTodo('')
+    toast.success(t.todoAdded)
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -1,32 +1,32 @@
 # 🗒️ Todo List App
 
-Un'applicazione moderna per la gestione delle attività costruita con Next.js 15, TypeScript e Framer Motion. Presenta un'interfaccia pulita con supporto per la modalità scura, opzioni multilingua e animazioni fluide.
+A modern task management application built with Next.js 15, TypeScript, and Framer Motion. Features a clean interface with dark mode support, multilingual options, and smooth animations.
 
 ![Todo List App Screenshot](public/screenshot.png)
 
-## ✨ Caratteristiche
+## ✨ Features
 
-📝 Gestione completa delle attività (aggiungi, elimina, completa)  
-🌍 Supporto multilingua (Inglese, Italiano, Spagnolo, Tedesco, Francese)  
-🌓 Modalità Chiara/Scura integrata  
-📱 Design completamente responsive  
-✨ Animazioni fluide con Framer Motion  
-🔔 Notifiche toast per le azioni  
-🎨 Interfaccia moderna con TailwindCSS  
-📱 Menu hamburger per dispositivi mobili  
-💾 Persistenza dello stato dell'interfaccia  
-🚀 Partial Prerendering (Next.js 15)  
-🔒 Server Actions ottimizzate  
+📝 Complete task management (add, delete, complete)
+🌍 Multilingual support (English, Italian, Spanish, German, French)
+🌓 Built-in Light/Dark mode
+📱 Fully responsive design
+✨ Smooth animations with Framer Motion
+🔔 Toast notifications for actions
+🎨 Modern interface with TailwindCSS
+📱 Hamburger menu for mobile devices
+💾 UI state persistence
+🚀 Partial Prerendering (Next.js 15)
+🔒 Optimized Server Actions
 🎯 Typed Routes
 
-## 🛠️ Stack Tecnologico
+## 🛠️ Tech Stack
 
 - Next.js 15
 - TypeScript
 - Framer Motion
 - TailwindCSS
 - Radix UI
-- Sonner (notifiche toast)
+- Sonner (toast notifications)
 - Country Flag Icons
 - Lucide React
 - Hamburger React

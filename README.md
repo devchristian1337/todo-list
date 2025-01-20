@@ -2,7 +2,7 @@
 
 A modern task management application built with Next.js 15, TypeScript, and Framer Motion. Features a clean interface with dark mode support, multilingual options, and smooth animations.
 
-![Todo List App Screenshot](public/screenshot.png)
+![Todo List App Screenshot](https://iili.io/2iTuT2R.png)
 
 ## ✨ Features
 

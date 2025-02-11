@@ -1,20 +1,16 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react";
 
 export type Todo = {
-  id: number
-  text: string
-  completed: boolean
-}
+  id: number;
+  text: string;
+  completed: boolean;
+};
 
 export type AnimatedTextProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export type LanguageDropdownProps = {
-  language: string
-  setLanguage: (lang: string) => void
-}
-
-export interface TodoEvent extends Event {
-  target: HTMLInputElement
-} 
+  language: string;
+  setLanguage: (lang: string) => void;
+};

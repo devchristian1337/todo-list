@@ -1,30 +1,38 @@
 /* eslint-disable react/no-unescaped-entities */
-'use client'
+"use client";
 
-import { useState, useEffect, ChangeEvent } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Plus, Trash2, Github, Languages, Check } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
-import { toast, Toaster } from 'sonner'
-import { translations, languages } from '@/lib/translations'
-import { HamburgerMenu } from '@/components/hamburger-menu'
-import { Todo, AnimatedTextProps, LanguageDropdownProps } from '@/lib/types'
+import { useState, useEffect, ChangeEvent } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Sun,
+  Moon,
+  Plus,
+  Trash2,
+  Github,
+  Languages,
+  Check,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast, Toaster } from "sonner";
+import { translations, languages } from "@/lib/translations";
+import { HamburgerMenu } from "@/components/hamburger-menu";
+import { Todo, AnimatedTextProps, LanguageDropdownProps } from "@/lib/types";
 
 function LanguageDropdown({ language, setLanguage }: LanguageDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const dropdown = document.getElementById('language-dropdown');
+      const dropdown = document.getElementById("language-dropdown");
       if (dropdown && !dropdown.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -37,7 +45,7 @@ function LanguageDropdown({ language, setLanguage }: LanguageDropdownProps) {
       >
         <Languages className="h-5 w-5" />
       </Button>
-      
+
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -55,8 +63,8 @@ function LanguageDropdown({ language, setLanguage }: LanguageDropdownProps) {
                 }}
                 className={`${
                   language === lang.code
-                    ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'
-                    : 'text-gray-700 dark:text-gray-300'
+                    ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                    : "text-gray-700 dark:text-gray-300"
                 } group flex w-full items-center justify-between px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700`}
               >
                 <div className="flex items-center">
@@ -90,91 +98,93 @@ function AnimatedText({ children }: AnimatedTextProps) {
 }
 
 export function TodoAppComponent() {
-  const [todos, setTodos] = useState<Todo[]>([])
-  const [newTodo, setNewTodo] = useState('')
-  const [darkMode, setDarkMode] = useState(false)
-  const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null)
-  const [showClearAllConfirm, setShowClearAllConfirm] = useState(false)
-  const [language, setLanguage] = useState('en')
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTodo, setNewTodo] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
+  const [todoToDelete, setTodoToDelete] = useState<Todo | null>(null);
+  const [showClearAllConfirm, setShowClearAllConfirm] = useState(false);
+  const [language, setLanguage] = useState("en");
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    const browserLang = navigator.language.split('-')[0]
-    if (languages.some(lang => lang.code === browserLang)) {
-      setLanguage(browserLang)
+    const browserLang = navigator.language.split("-")[0];
+    if (languages.some((lang) => lang.code === browserLang)) {
+      setLanguage(browserLang);
     }
-  }, [])
+  }, []);
 
-  const t = translations[language]
+  const t = translations[language];
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove("dark");
     }
-  }, [darkMode])
+  }, [darkMode]);
 
   const addTodo = () => {
-    if (newTodo.trim() === '') {
-      toast.error(t.emptyTodoError || 'Please enter a todo')
-      return
+    if (newTodo.trim() === "") {
+      toast.error(t.emptyTodoError || "Please enter a todo");
+      return;
     }
-    
-    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }])
-    setNewTodo('')
-    toast.success(t.todoAdded)
-  }
+
+    setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+    setNewTodo("");
+    toast.success(t.todoAdded);
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTodo(e.target.value)
-  }
+    setNewTodo(e.target.value);
+  };
 
   const deleteTodo = (id: number) => {
-    const todo = todos.find((todo: Todo) => todo.id === id)
+    const todo = todos.find((todo: Todo) => todo.id === id);
     if (todo) {
-      setTodoToDelete(todo)
+      setTodoToDelete(todo);
     }
-  }
+  };
 
   const confirmDelete = () => {
     if (todoToDelete) {
-      setTodos(todos.filter(todo => todo.id !== todoToDelete.id))
-      toast.error(t.todoDeleted.replace('{todo}', todoToDelete.text))
-      setTodoToDelete(null)
+      setTodos(todos.filter((todo) => todo.id !== todoToDelete.id));
+      toast.error(t.todoDeleted.replace("{todo}", todoToDelete.text));
+      setTodoToDelete(null);
     }
-  }
+  };
 
   const toggleTodo = (id: number) => {
-    setTodos(todos.map((todo: Todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ))
-  }
+    setTodos(
+      todos.map((todo: Todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
 
   const clearAllTodos = () => {
-    setTodos([])
-    setShowClearAllConfirm(false)
-    toast.error(t.allTodosDeleted)
-  }
+    setTodos([]);
+    setShowClearAllConfirm(false);
+    toast.error(t.allTodosDeleted);
+  };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 flex flex-col pt-16 font-['Miracode']"
     >
-      <Toaster 
+      <Toaster
         position="bottom-right"
         toastOptions={{
           style: {
-            background: darkMode ? '#1F2937' : '#FFFFFF',
-            color: darkMode ? '#E5E7EB' : '#1F2937',
-            border: '1px solid',
-            borderColor: darkMode ? '#374151' : '#E5E7EB',
+            background: darkMode ? "#1F2937" : "#FFFFFF",
+            color: darkMode ? "#E5E7EB" : "#1F2937",
+            border: "1px solid",
+            borderColor: darkMode ? "#374151" : "#E5E7EB",
           },
         }}
       />
-      
+
       {/* Nascondi i bottoni originali su mobile */}
       <div className="hidden md:block">
         <Button
@@ -183,7 +193,11 @@ export function TodoAppComponent() {
           onClick={() => setDarkMode(!darkMode)}
           className="text-gray-800 dark:text-gray-200 absolute top-4 right-4 border border-gray-200 dark:border-gray-700"
         >
-          {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          {darkMode ? (
+            <Sun className="h-5 w-5" />
+          ) : (
+            <Moon className="h-5 w-5" />
+          )}
         </Button>
 
         <div className="absolute top-4 right-16">
@@ -204,12 +218,12 @@ export function TodoAppComponent() {
       </div>
 
       <div className="flex-1 container mx-auto max-w-md p-4">
-        <motion.div 
+        <motion.div
           initial={{ y: -20 }}
           animate={{ y: 0 }}
           className="mb-8 flex items-center justify-between"
         >
-          <motion.h1 
+          <motion.h1
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold text-gray-800 dark:text-gray-200 font-['Miracode']"
           >
@@ -229,8 +243,8 @@ export function TodoAppComponent() {
             </motion.div>
           )}
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ y: -10 }}
           animate={{ y: 0 }}
           className="flex mb-8"
@@ -240,7 +254,7 @@ export function TodoAppComponent() {
             placeholder={t.addPlaceholder}
             value={newTodo}
             onChange={handleInputChange}
-            className="flex-grow mr-2"
+            className="flex-grow mr-2 select-none"
           />
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button onClick={addTodo}>
@@ -256,19 +270,19 @@ export function TodoAppComponent() {
               <motion.div
                 key={todo.id}
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ 
-                  opacity: 1, 
+                animate={{
+                  opacity: 1,
                   y: 0,
-                  transition: { delay: index * 0.1 } // Aggiunge un effetto a cascata
+                  transition: { delay: index * 0.1 }, // Aggiunge un effetto a cascata
                 }}
-                exit={{ 
-                  opacity: 0, 
+                exit={{
+                  opacity: 0,
                   x: -100,
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
                 whileHover={{ scale: 1.02 }}
                 className={`flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-lg shadow ${
-                  todo.completed ? 'opacity-60' : ''
+                  todo.completed ? "opacity-60" : ""
                 }`}
               >
                 <div className="flex items-center">
@@ -280,8 +294,8 @@ export function TodoAppComponent() {
                   />
                   <motion.label
                     animate={{
-                      textDecoration: todo.completed ? 'line-through' : 'none',
-                      opacity: todo.completed ? 0.6 : 1
+                      textDecoration: todo.completed ? "line-through" : "none",
+                      opacity: todo.completed ? 0.6 : 1,
                     }}
                     htmlFor={`todo-${todo.id}`}
                     className="text-gray-800 dark:text-gray-200"
@@ -289,7 +303,10 @@ export function TodoAppComponent() {
                     {todo.text}
                   </motion.label>
                 </div>
-                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
                   <Button
                     variant="ghost"
                     size="icon"
@@ -304,29 +321,31 @@ export function TodoAppComponent() {
           </div>
         </AnimatePresence>
       </div>
-      
+
       {/* Footer con animazione */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
         className="w-full py-4 text-center text-gray-600 dark:text-gray-400"
       >
-        <motion.a 
+        <motion.a
           whileHover={{ scale: 1.05 }}
           href="https://github.com/devchristian1337"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 hover:text-gray-800 dark:hover:text-gray-200 transition-colors leading-none"
         >
-          <span className="relative top-[1px]">Made by devchristian1337</span>
+          <span className="relative top-[1px] select-none">
+            Made by devchristian1337
+          </span>
           <Github className="h-5 w-5" strokeWidth={1.5} />
         </motion.a>
       </motion.div>
-      
+
       {todoToDelete && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <motion.div 
+          <motion.div
             className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -354,7 +373,7 @@ export function TodoAppComponent() {
       {/* Modal per conferma eliminazione di tutto */}
       {showClearAllConfirm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <motion.div 
+          <motion.div
             className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md w-full mx-4"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -366,7 +385,10 @@ export function TodoAppComponent() {
               <AnimatedText>{t.deleteAllMessage}</AnimatedText>
             </p>
             <div className="flex justify-end gap-3">
-              <Button variant="outline" onClick={() => setShowClearAllConfirm(false)}>
+              <Button
+                variant="outline"
+                onClick={() => setShowClearAllConfirm(false)}
+              >
                 <AnimatedText>{t.cancel}</AnimatedText>
               </Button>
               <Button variant="destructive" onClick={clearAllTodos}>
@@ -377,5 +399,5 @@ export function TodoAppComponent() {
         </div>
       )}
     </motion.div>
-  )
+  );
 }
